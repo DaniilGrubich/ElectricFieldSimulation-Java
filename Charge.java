@@ -1,3 +1,7 @@
+// The class Charge is used to create a charge object. 
+// The charge object has a position, velocity, and charge.
+// The charge object also has a method to apply a force to the charge.
+
 class Charge {
     float q;
 

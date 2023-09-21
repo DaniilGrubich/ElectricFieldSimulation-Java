@@ -1,3 +1,14 @@
+/*
+ * Author:  Daniil Pavlovich Grubich
+ * Purpose: Handles key presses.
+ *          The user can press the 'v' key to toggle the voltage map and the 'f' key to toggle
+ *          the field lines. The 'd' key clears the voltage map and the 'c' key clears all charges.
+ *          The 't' key creates a grid of tracers. The '=' and '-' keys scale the charges. The space bar
+ *          creates a test charge at the mouse's location. The escape key exits the program. 
+ *      
+ *
+ * 
+ */
 import java.awt.MouseInfo;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -56,67 +67,3 @@ public class KeyCallbacks extends KeyAdapter {
         }
     }
 }
-
-//     @Override
-//     public void keyPressed(KeyEvent e) {
-//         if(e.getKeyCode() == KeyEvent.VK_V) {
-//             voltageMap = !voltageMap;
-//         }else if(e.getKeyCode() == KeyEvent.VK_SHIFT)
-//             ShiftPressed = true;
-//         else if(e.getKeyCode() == KeyEvent.VK_CONTROL)
-//             ControlPressed = true;
-//         else if(e.getKeyCode() == KeyEvent.VK_E)
-//             EPressed = true;
-//         else if(e.getKeyCode() == KeyEvent.VK_SPACE){
-//             tCharges.add(new Charge(MouseInfo.getPointerInfo().getLocation().x - 2, MouseInfo.getPointerInfo().getLocation().y - 2, 1, false));
-//         }else if(e.getKeyCode() == KeyEvent.VK_EQUALS){
-//             for (Charge c :
-//                     charges) {
-//                 c.q *= 2f;
-//             }
-//             startingQ*=2f;
-//             voltageHashMap = computeVoltageMap();
-//         }else if(e.getKeyCode() == KeyEvent.VK_MINUS){
-//             if(charges.get(0).q/2f != .5f){
-//                 for (Charge c :
-//                         charges) {
-//                     c.q/=2f;
-//                 }
-//                 startingQ/=2f;
-//             }
-//             voltageHashMap = computeVoltageMap();
-
-//         }else if(e.getKeyCode() == KeyEvent.VK_D){
-//             clearDisp = true;
-//         }else if(e.getKeyCode() == KeyEvent.VK_C){
-//             charges.clear();
-//             tCharges.clear();
-//             eqpotentials.clear();
-//             clearDisp = true;
-//         }else if(e.getKeyCode() == KeyEvent.VK_O){
-
-//             if(!ShiftPressed) {
-//                 angleOffset += .1;
-//                 for (Charge c :
-//                         charges) {
-//                     int chargeToPlace = (int) (c.q / Math.abs(c.q));
-//                     for (float i = 0; i < 2f * 3.14f; i += 2f * 3.14f / (12f)) {
-//                         float ang = (i + angleOffset);
-//                         int x = (int) (c.x + (4.f) * Math.cos(ang));
-//                         int y = (int) (c.y + (4.f) * Math.sin(ang));
-
-//                         tCharges.add(new Charge(x, y, chargeToPlace, true));
-
-
-//                     }
-
-
-//                 }
-//             }
-
-//         }else if(e.getKeyCode() == KeyEvent.VK_F)
-//             field = !field;
-//         else if(e.getKeyCode() == KeyEvent.VK_T)
-//             trace = !trace;
-//     }
-// }

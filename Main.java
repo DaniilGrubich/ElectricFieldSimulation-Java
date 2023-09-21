@@ -1,3 +1,11 @@
+/*
+ * Name:    Daniil Pavlovich Grubich
+ * Date:    4/30/2021
+ * Purpose: This program simulates the electric field of a set of charges
+ *          and displays the electric field as vectors and the voltage map
+ *          as a color map. The user can add charges by clicking on the screen.
+ */
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -8,16 +16,14 @@ import java.util.Timer;
 
 import javax.swing.JFrame;
 
-
-
 public class Main extends JFrame {
 
-    static ArrayList<Charge> charges = new ArrayList<>();
-    static ArrayList<Tracer> tracers = new ArrayList<>();
-    static BufferedImage voltageImageMap;
+    static ArrayList<Charge> charges = new ArrayList<>(); //list of charges
+    static ArrayList<Tracer> tracers = new ArrayList<>(); //list of tracers
+    static BufferedImage voltageImageMap; //voltage map
 
-    static boolean showVoltageMap = false;
-    static boolean field = false;
+    static boolean showVoltageMap = false; //whether or not to show the voltage map
+    static boolean field = false; //whether or not to show the electric field
 
     static BufferStrategy bs;
     static Graphics2D g;
@@ -77,6 +83,7 @@ public class Main extends JFrame {
 
     }
 
+    //compute the voltage at a given point
     float voltageAt(float x, float y) {
         float v = 0;
         try {
@@ -93,6 +100,7 @@ public class Main extends JFrame {
         return v;
     }
 
+    //apply the force of the charges to the particles
     void applyForceToParticles(){
         try {
             for (Charge tc : charges) {
@@ -123,6 +131,7 @@ public class Main extends JFrame {
         }
 }
 
+    //apply the force of the charges to the tracers
     void applyForceToTracers(){
         try {
             for (Tracer t : tracers) {
@@ -153,6 +162,7 @@ public class Main extends JFrame {
         }   
     }
 
+    //draw charges as lines on the screen to show the position of the charges
     void drawPaticles(){
         try {
             for (Charge c : charges) {
@@ -171,6 +181,7 @@ public class Main extends JFrame {
         } catch (ConcurrentModificationException ignore) {}
     }
 
+    //compute the voltage map and store it in the voltageImageMap
     void computeVoltageMap(float heightOffsetFrac, float heightLengthFrac) {
         float r = 1, g, b, a;
         for (int y = (int) (getHeight()*heightOffsetFrac); y < (getHeight()*heightOffsetFrac) + (getHeight()*heightLengthFrac); y++) {
@@ -202,15 +213,7 @@ public class Main extends JFrame {
         }
     }
 
-    void updateVoltageMap(){
-        Thread t = new Thread(() -> {
-            computeVoltageMap(0, 1);
-            
-        });
-
-        t.start();
-    }
-
+    //remove charges that are off the screen or have been marked for removal
     void cleanCharges(){
         for (int i = 0; i < charges.size(); i++) {
 
@@ -223,6 +226,7 @@ public class Main extends JFrame {
         }
     }
 
+    //remove tracers that are off the screen or have been marked for removal
     void cleanTracers(){
         for (int i = 0; i < tracers.size(); i++) {
 
@@ -235,6 +239,7 @@ public class Main extends JFrame {
         }
     }
 
+    //draw vectors as black lines on the screen to show the direction of the electric field
     void drawVectors(int spacing){
         for (float x = 0; x < getWidth(); x += spacing) {
             for (float y = 0; y < getHeight(); y += spacing) {
@@ -265,6 +270,7 @@ public class Main extends JFrame {
         }
     }
 
+    //draw tracers as pink dots on the screen to show the path of the tracers 
     void drawTracers(){
         try {
             for (Tracer t : tracers) {
